@@ -1,0 +1,11 @@
+rootProject.name = 'silverpotion'
+
+include 'eureka'
+include 'gateway'
+include 'user'
+include 'post'
+
+project(':eureka').projectDir = file('eureka')
+project(':gateway').projectDir = file('gateway')
+project(':user').projectDir = file('user')
+project(':post').projectDir = file('post')
