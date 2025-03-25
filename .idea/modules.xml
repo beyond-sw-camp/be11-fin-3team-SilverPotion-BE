@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/post.main.iml" filepath="$PROJECT_DIR$/.idea/modules/post.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/silverpotion.iml" filepath="$PROJECT_DIR$/.idea/silverpotion.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user.main.iml" />
     </modules>
   </component>
 </project>
