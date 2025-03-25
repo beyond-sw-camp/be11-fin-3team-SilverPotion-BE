@@ -92,7 +92,7 @@
 
 ## 📑 요구사항 정의서 (프로젝트기획)
 - 기능적 / 비기능 요구사항, 유즈케이스
-  👉 [📎 문서 보기](./docs/요구사항_정의서.pdf)
+  👉 [📎 문서 보기](https://docs.google.com/spreadsheets/d/1xPL9fzuUFguVioFHqQyqesHNe3U2_l63kEcYtexFRvk/edit?gid=1960802497#gid=1960802497)
 
 ---
 
@@ -105,14 +105,14 @@
 
 ## 📑 WBS (프로젝트기획)
 - 업무 분류 체계, 일정계획
-  👉 [📎 문서 보기](./docs/WBS.pdf)
+  👉 [📎 문서 보기](https://docs.google.com/spreadsheets/d/1xPL9fzuUFguVioFHqQyqesHNe3U2_l63kEcYtexFRvk/edit?gid=1809279197#gid=1809279197)
 
 ---
 
 ## 📑 ERD (프로젝트기획)
 > 데이터베이스 구조  
 ![ERD](./images/erd.png)  
-👉 [📎 문서 보기](./docs/ERD.pdf)
+👉 [📎 문서 보기](https://www.erdcloud.com/d/5zTkSLQ7qB9hg6b4G)
 
 ---
 
