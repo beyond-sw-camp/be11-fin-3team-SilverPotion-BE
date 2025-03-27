@@ -19,6 +19,8 @@ spring:
     #   user-sevice?? ???? eureka? ??
     name: user-service
 
+
+
 eureka:
   client:
     serviceUrl:
@@ -26,3 +28,13 @@ eureka:
 server:
   port: 0
   #port?? 0?? ??? ??? ????? ???  port??
+
+jwt:
+#  be11-fin-010-SimverPotion-wearetheteamwecandoitbe11-fin-010-SimverPotion-wearetheteamwecandoitbe11-fin-010-SimverPotion-wearetheteamwecandoit
+  secretKey: YmUxMS1maW4tMDEwLVNpbXZlclBvdGlvbi13ZWFyZXRoZXRlYW13ZWNhbmRvaXRiZTExLWZpbi0wMTAtU2ltdmVyUG90aW9uLXdlYXJldGhldGVhbXdlY2FuZG9pdGJlMTEtZmluLTAxMC1TaW12ZXJQb3Rpb24td2VhcmV0aGV0ZWFtd2VjYW5kb2l0
+  expiration: 3000
+#  kyungleader-leemaknae-choisharpboy-kimisme-wearetheteamandgothrougheverystagekyungleader-leemaknae-choisharpboy-kimisme-wearetheteamandgothrougheverystage
+  secretKeyRt: a3l1bmdsZWFkZXItbGVlbWFrbmFlLWNob2lzaGFycGJveS1raW1pc21lLXdlYXJldGhldGVhbWFuZGdvdGhyb3VnaGV2ZXJ5c3RhZ2VreXVuZ2xlYWRlci1sZWVtYWtuYWUtY2hvaXNoYXJwYm95LWtpbWlzbWUtd2VhcmV0aGV0ZWFtYW5kZ290aHJvdWdoZXZlcnlzdGFnZQ==
+#  200일
+  expirationRt: 288000
+
