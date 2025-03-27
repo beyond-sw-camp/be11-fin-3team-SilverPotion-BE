@@ -69,6 +69,6 @@ public class UserController {
 //    }
 
 //   5. 피보호자 연결 요청(건강메이트?)
-    @Post
+//    @Post
 
 }
