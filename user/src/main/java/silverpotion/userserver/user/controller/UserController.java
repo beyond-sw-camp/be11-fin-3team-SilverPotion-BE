@@ -67,4 +67,8 @@ public class UserController {
 //        Long id = userService.myProfile(dto,loginId);
 //   //잠시 중단
 //    }
+
+//   5. 피보호자 연결 요청(건강메이트?)
+    @Post
+
 }
