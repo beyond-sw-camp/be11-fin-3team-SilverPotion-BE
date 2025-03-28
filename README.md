@@ -110,8 +110,8 @@
 ---
 
 ## 📑 ERD (프로젝트기획)
-> <details>
-> <summary>데이터베이스 구조 보기</summary>
+<details>
+<summary>데이터베이스 구조 보기</summary>
   
 > ![스크린샷 2025-03-28 112415](https://github.com/user-attachments/assets/f55b36ad-2a82-4126-b2a4-f14a5e7abe99)
 > ### 유저
@@ -123,8 +123,8 @@
 > 
 > 👉 [📎 문서 보기](https://www.erdcloud.com/d/5zTkSLQ7qB9hg6b4G)
 > 
----
 </details>
+---
 ## 📑 화면설계서 (프로젝트기획)
 > 주요 UI/UX 흐름  
 ![UI 흐름](./images/ui-flow.png)  
