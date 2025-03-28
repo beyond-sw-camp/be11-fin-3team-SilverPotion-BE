@@ -26,7 +26,7 @@ public class CareRelationController {
 // 1.연결 요청 보내기
 //    이때 로그인 아이디는 연결을 보내는 사람이니까 보호자가 될 유저.
     @PostMapping("/send")
-    public ResponseEntity<?> sendCareLink(@RequestBody CareRelationCreateDto dto, @RequestHeader("X-User_Id")String loginId){
+    public ResponseEntity<?> sendCareLink(@RequestBody CareRelationCreateDto dto, @RequestHeader("X-User-Id")String loginId){
          careRelationService.sendCareLink(dto,loginId);
          return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(), "sending success","success"),HttpStatus.CREATED);
     }
