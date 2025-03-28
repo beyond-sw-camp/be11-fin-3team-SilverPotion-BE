@@ -1,6 +1,7 @@
 package silverpotion.userserver.common.service;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import silverpotion.userserver.user.domain.DelYN;
 import silverpotion.userserver.user.domain.Role;
@@ -14,10 +15,12 @@ public class InitialDataLoader implements CommandLineRunner {
 
     private final UserService userService;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public InitialDataLoader(UserService userService, UserRepository userRepository) {
+    public InitialDataLoader(UserService userService, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,11 +34,11 @@ public class InitialDataLoader implements CommandLineRunner {
             User user = User.builder()
                     .sex(Sex.FEMALE)
                     .role(Role.USER)
-                    .phoneNumber("01000000000")
+                    .phoneNumber("01076084578")
                     .name("홍진영")
                     .birthday("19500818")
                     .loginId("user")
-                    .password("12341234")
+                    .password(passwordEncoder.encode("12341234"))
                     .nickName("홍홍홍")
                     .email("riri")
                     .address("010")

@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-public class UserProfileDto {
+public class UserMyPageDto {
+    private Long id;
     private String nickName;
     private String name;
     private String email;
@@ -23,7 +24,8 @@ public class UserProfileDto {
     private String streetAddress;
     private String detailAddress;
     private Integer cash;
-    private List<User> dependants;
-    private User careUser;
+    //아래는 나와 연결된 피보호자와 보호자 이름들
+    private List<String> dependentName;
+    private List<String> protectorName;
 
 }
