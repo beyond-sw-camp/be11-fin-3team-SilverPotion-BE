@@ -111,7 +111,14 @@
 
 ## 📑 ERD (프로젝트기획)
 > 데이터베이스 구조  
-![ERD](./images/erd.png)  
+![스크린샷 2025-03-28 112415](https://github.com/user-attachments/assets/f55b36ad-2a82-4126-b2a4-f14a5e7abe99)
+### 유저
+![스크린샷 2025-03-28 112538](https://github.com/user-attachments/assets/26e79aeb-b5fb-4156-a274-276320a0b99c)
+### 소모임
+![스크린샷 2025-03-28 112512](https://github.com/user-attachments/assets/d908d100-0905-441b-845e-92b8b700e6c3)
+### 채팅
+![스크린샷 2025-03-28 112434](https://github.com/user-attachments/assets/2cc2c98f-37cc-42e7-baed-c3318dbcd8f9)
+
 👉 [📎 문서 보기](https://www.erdcloud.com/d/5zTkSLQ7qB9hg6b4G)
 
 ---
