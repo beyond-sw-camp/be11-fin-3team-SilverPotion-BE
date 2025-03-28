@@ -10,16 +10,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import silverpotion.userserver.careRelation.domain.CareRelation;
 import silverpotion.userserver.common.auth.JwtTokenProvider;
 import silverpotion.userserver.user.domain.DelYN;
 import silverpotion.userserver.user.domain.User;
-import silverpotion.userserver.user.dto.LoginDto;
-import silverpotion.userserver.user.dto.UserCreateDto;
-import silverpotion.userserver.user.dto.UserRefreshDto;
-import silverpotion.userserver.user.dto.UserUpdateDto;
+import silverpotion.userserver.user.dto.*;
 import silverpotion.userserver.user.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -106,5 +106,27 @@ public class UserService {
       }
       user.updateUser(dto,newPw);
       return user.getId();
+    }
+
+//    4.내 정보 조회(마이페이지)
+    public UserMyPageDto userMyPage(String loginId){
+        User user = userRepository.findByLoginIdAndDelYN(loginId,DelYN.N).orElseThrow(()->new EntityNotFoundException("없는 유저입니다"));
+        return user.toMyPageDtoFromEntity(user.findNameFromDependentList(),user.findNameFromProtectorsList());
+    }
+
+//    5.내 피보호자 조회
+    public List<UserLinkedUserDto> whoMyDependents(String loginId){
+        User user = userRepository.findByLoginIdAndDelYN(loginId,DelYN.N).orElseThrow(()-> new EntityNotFoundException("없는 유저입니다"));
+        List<CareRelation> dependents = user.getAsProtectors(); // 내 피보호자는 내가 보호자로 맺은 관계속에 있으니까
+        return dependents.stream().map(c->c.getDependent().toLinkUserDtoFromEntity()).toList();
+
+    }
+
+//    6.내 보호자 조회
+    public List<UserLinkedUserDto> whoMyProtectors(String loginId){
+        User user = userRepository.findByLoginIdAndDelYN(loginId,DelYN.N).orElseThrow(()-> new EntityNotFoundException("없는 유저입니다"));
+        List<CareRelation> protectors = user.getAsDependents(); //내 보호자는 내가 피보호자로 맺은 관계속에 있으니까
+        return protectors.stream().map(c->c.getProtector().toLinkUserDtoFromEntity()).toList();
+
     }
 }

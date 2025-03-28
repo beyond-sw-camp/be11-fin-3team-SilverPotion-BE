@@ -11,6 +11,7 @@ import silverpotion.userserver.common.dto.CommonDto;
 import silverpotion.userserver.user.dto.*;
 import silverpotion.userserver.user.service.UserService;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -61,14 +62,25 @@ public class UserController {
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "update success", id),HttpStatus.OK);
     }
 
-// 4.내 정보 조회(마이페이지 프로필 조회)
-//    @GetMapping("/myprofile")
-//    public ResponseEntity<?> myProfile(@RequestBody UserProfileDto dto, @RequestHeader("X-User_Id")String loginId){
-//        Long id = userService.myProfile(dto,loginId);
-//   //잠시 중단
-//    }
+// 4.내 정보 조회(마이페이지 프로필 조회,여기에 연결된 보호자,피보호자이름도 조회할 수 있게 해놨는데 프론트에서는 아래 5,6번 쓰는게 더 나을 듯)
+    @GetMapping("/myprofile")
+    public ResponseEntity<?> myProfile(@RequestHeader("X-User-Id")String loginId){
+        UserMyPageDto dto = userService.userMyPage(loginId);
+    return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "success",dto),HttpStatus.OK);
+    }
 
-//   5. 피보호자 연결 요청(건강메이트?)
-//    @Post
+//   5. 연결된 피보호자 조회
+    @GetMapping("/myDependentList")
+    public ResponseEntity<?> whoMyDependents(@RequestHeader("X-User-Id")String loginId){
+      List<UserLinkedUserDto>dependents = userService.whoMyDependents(loginId);
+    return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"success",dependents ),HttpStatus.OK);
+    }
+
+//    6.연결된 보호자 조회
+    @GetMapping("/myProtectList")
+    public ResponseEntity<?> whoMyProtectors(@RequestHeader("X-User-Id")String loginId){
+        List<UserLinkedUserDto>protectors = userService.whoMyProtectors(loginId);
+        return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"success",protectors),HttpStatus.OK);
+    }
 
 }

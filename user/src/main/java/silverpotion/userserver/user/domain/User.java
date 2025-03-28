@@ -2,7 +2,10 @@ package silverpotion.userserver.user.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import silverpotion.userserver.careRelation.domain.CareRelation;
 import silverpotion.userserver.user.dto.UserCreateDto;
+import silverpotion.userserver.user.dto.UserLinkedUserDto;
+import silverpotion.userserver.user.dto.UserMyPageDto;
 import silverpotion.userserver.user.dto.UserUpdateDto;
 
 import java.util.ArrayList;
@@ -60,14 +63,14 @@ public class User extends silverpotion.userserver.common.domain.BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private DelYN delYN = DelYN.N;
-    //피보호자(하나의 유저에 4명의 피부양자가 있으니까 Onetomany
-    @OneToMany(mappedBy = "careUser")
+    //내가 피보호자로 들어가는 관계
+    @OneToMany(mappedBy = "dependent")
     @Builder.Default
-    private List<User> dependents = new ArrayList<>();
-    //보호자(4명의 유저가 같은 보호자를 가질 수 있으니까 ManyToOne)
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="careUser_id")
-    private User careUser;
+    private List<CareRelation> asDependents = new ArrayList<>();
+    //내가 보호자로 들어가는 관계
+    @OneToMany(mappedBy = "protector")
+    @Builder.Default
+    private List<CareRelation> asProtectors = new ArrayList<>();
     //로그인 타입
     @Enumerated(EnumType.STRING)
     private SocialType socialType;
@@ -97,6 +100,37 @@ public class User extends silverpotion.userserver.common.domain.BaseTimeEntity {
         if(dto.getDetailAddress() != null){
             this.detailAddress = dto.getDetailAddress();
         }
+    }
+
+    public UserMyPageDto toMyPageDtoFromEntity(List<String> dependentNames, List<String>protectorNames){
+        return UserMyPageDto.builder().nickName(this.nickName).name(this.name).email(this.email)
+                .sex(this.sex.toString()).phoneNumber(this.phoneNumber).birthday(this.birthday)
+                .address(this.address).streetAddress(this.streetAddress).detailAddress(this.detailAddress)
+                .cash(this.cash).id(this.id)
+                .dependentName(dependentNames)
+                .protectorName(protectorNames)
+                .build();
+    }
+    public UserLinkedUserDto toLinkUserDtoFromEntity(){
+        return UserLinkedUserDto.builder().userId(this.id).name(this.name).build();
+    }
+
+    public List<String> findNameFromDependentList(){
+       List<CareRelation> dependents = this.asProtectors;
+       List<String> dependentNames = new ArrayList<>();
+       for(CareRelation c : dependents){
+          dependentNames.add(c.getDependent().getName());
+       }
+       return dependentNames;
+    }
+
+    public List<String> findNameFromProtectorsList(){
+        List<CareRelation> protectors = this.asDependents;
+        List<String> protectorNames = new ArrayList<>();
+        for(CareRelation c : protectors){
+            protectorNames.add(c.getProtector().getName());
+        }
+        return protectorNames;
     }
 
 
