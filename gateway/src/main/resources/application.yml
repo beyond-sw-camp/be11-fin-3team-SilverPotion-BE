@@ -1,0 +1,35 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+#      CORS공통처리
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: 'http://localhost:3000'
+            allowedMethods: '*'
+            allowedHeaders: '*'
+            allowedCredentials: true
+      routes:
+        - id: user-service
+          predicates:
+            - Path=/user-service/**
+          filters:
+#            StripPrefix : 첫번째 접두어를 제거 후에 user-service로 http요청 전달
+            - StripPrefix=1
+          uri: lb://user-service
+        - id: post-service
+          predicates:
+            - Path=/post-service/**
+          filters:
+            - StripPrefix=1
+          uri: lb://post-service
+jwt:
+  #  be11-fin-010-SimverPotion-wearetheteamwecandoitbe11-fin-010-SimverPotion-wearetheteamwecandoitbe11-fin-010-SimverPotion-wearetheteamwecandoit
+  secretKey: YmUxMS1maW4tMDEwLVNpbXZlclBvdGlvbi13ZWFyZXRoZXRlYW13ZWNhbmRvaXRiZTExLWZpbi0wMTAtU2ltdmVyUG90aW9uLXdlYXJldGhldGVhbXdlY2FuZG9pdGJlMTEtZmluLTAxMC1TaW12ZXJQb3Rpb24td2VhcmV0aGV0ZWFtd2VjYW5kb2l0
+
