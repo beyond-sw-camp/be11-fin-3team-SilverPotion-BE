@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="60efce42-6315-4e68-97cd-9fda465908df" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/common/silverpotion.common.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/post/silverpotion.post.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/user/silverpotion.user.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/silverpotion/dto/UserMyPageDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/comment/controller/CommentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/comment/domain/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/comment/domain/CommentLike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/comment/repository/CommentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/comment/service/CommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/common/config/AwsS3Config.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/PostFile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/PostLike.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/PostStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/dtos/FreePostUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/dtos/NoticePostUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/dtos/PostCategoryDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/dtos/PostInitDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/dtos/PostUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/dtos/VotePostUpdateDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/repository/PostFileRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/repository/PostLikeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/service/PostLikeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/userClient/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/checksums/checksums.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/gc.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/md5-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/checksums/sha1-checksums.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.8/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/post.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/silverpotion.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/build/classes/java/main/silverpotion/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/build/classes/java/main/silverpotion/dto/UserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/build/libs/common-0.0.1-SNAPSHOT-plain.jar" beforeDir="false" afterPath="$PROJECT_DIR$/common/build/libs/common-0.0.1-SNAPSHOT-plain.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/common/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/silverpotion/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/silverpotion/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/post/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/PostApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/PostApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/PostCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/domain/PostCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/post/src/main/java/silverpotion/postserver/post/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/post/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/silverpotion/userserver/user/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/silverpotion/userserver/user/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/silverpotion/userserver/user/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/silverpotion/userserver/user/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/src/main/java/silverpotion/userserver/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user/src/main/java/silverpotion/userserver/user/service/UserService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;leejaeseok-98&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/beyond-sw-camp/be11-fin-3team-SilverPotion-BE.git&quot;,
+    &quot;accountId&quot;: &quot;593e8306-b17e-49b1-9adb-b17c52641151&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2uzZybQTBosFnnetLM5tTgWYDoK" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.C:/Users/Playdata/Desktop/be11-fin-3team-SilverPotion-BE/eureka [:eureka:silverpotion.eureka.EurekaApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.C:/Users/Playdata/Desktop/be11-fin-3team-SilverPotion-BE/gateway [:gateway:silverpotion.gateway.GatewayApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.C:/Users/Playdata/Desktop/be11-fin-3team-SilverPotion-BE/post [:post:silverpotion.postserver.PostApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.C:/Users/Playdata/Desktop/be11-fin-3team-SilverPotion-BE/user [:user:silverpotion.userserver.UserApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.be11-fin-3team-SilverPotion-BE:eureka [:eureka:silverpotion.eureka.EurekaApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.be11-fin-3team-SilverPotion-BE:gateway [:gateway:silverpotion.gateway.GatewayApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.be11-fin-3team-SilverPotion-BE:post [:post:silverpotion.postserver.PostApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.be11-fin-3team-SilverPotion-BE:user [:user:silverpotion.userserver.UserApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.eureka [:eureka:silverpotion.eureka.EurekaApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.gateway [:gateway:silverpotion.gateway.GatewayApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.post [:post:silverpotion.postserver.PostApplication.main()].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/post__create2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="silverpotion.dto" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.UserApplication">
+    <configuration name="EurekaApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="silverpotion.eureka.EurekaApplication" />
+      <module name="silverpotion.eureka.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="silverpotion.eureka.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="silverpotion.gateway.GatewayApplication" />
+      <module name="silverpotion.gateway.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="silverpotion.gateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="silverpotion.postserver.PostApplication" />
+      <module name="silverpotion.post.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="silverpotion.postserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="silverpotion.userserver.UserApplication" />
+      <module name="silverpotion.user.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="silverpotion.userserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UserApplication" />
+        <item itemvalue="Application.PostApplication" />
+        <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.EurekaApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="60efce42-6315-4e68-97cd-9fda465908df" name="Changes" comment="" />
+      <created>1743253618578</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1743253618578</updated>
+    </task>
+    <servers />
+  </component>
+</project>

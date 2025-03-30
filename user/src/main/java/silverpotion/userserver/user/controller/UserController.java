@@ -1,12 +1,9 @@
 package silverpotion.userserver.user.controller;
 
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import silverpotion.userserver.common.auth.JwtTokenProvider;
 import silverpotion.userserver.common.dto.CommonDto;
 import silverpotion.userserver.user.dto.*;
 import silverpotion.userserver.user.service.UserService;
@@ -82,5 +79,12 @@ public class UserController {
         List<UserLinkedUserDto>protectors = userService.whoMyProtectors(loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"success",protectors),HttpStatus.OK);
     }
+
+//    7.userId 조회(UserClient)
+    @PostMapping("/userId")
+    public Long getUserIdByLoginId(@RequestHeader("X-User-Id")String loginId){
+        return userService.getUserIdByLoginId(loginId);
+    }
+
 
 }

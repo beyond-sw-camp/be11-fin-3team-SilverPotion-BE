@@ -5,41 +5,13 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="corretto-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/eureka" />
-        <option name="modules">
-          <set>
+            <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/eureka" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/gateway" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/gateway" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/post" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/post" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/user" />
-        <option name="modules">
-          <set>
             <option value="$PROJECT_DIR$/user" />
           </set>
         </option>

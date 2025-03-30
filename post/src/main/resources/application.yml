@@ -27,3 +27,13 @@ server:
   port: 0
   #port?? 0?? ??? ??? ????? ???  port??
 
+# aws s3 계정 설정
+cloud:
+  aws:
+    credentials:
+      access-key: AKIA2KX4BVZJ6K37JH7Q
+      secret-key: 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
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: js_project

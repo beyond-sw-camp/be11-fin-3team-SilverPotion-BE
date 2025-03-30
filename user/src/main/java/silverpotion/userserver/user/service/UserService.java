@@ -129,4 +129,11 @@ public class UserService {
         return protectors.stream().map(c->c.getProtector().toLinkUserDtoFromEntity()).toList();
 
     }
+
+//    7.loginId로 userId조회하기
+    public Long getUserIdByLoginId(String loginId){
+        User user = userRepository.findByLoginId(loginId).orElseThrow(()->new EntityNotFoundException("없는 유저입니다."));
+        return user.getId();
+    }
+
 }

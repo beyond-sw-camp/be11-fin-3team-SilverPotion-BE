@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/post.main.iml" filepath="$PROJECT_DIR$/.idea/modules/post.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/silverpotion.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/silverpotion.common.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/post/silverpotion.post.main.iml" filepath="$PROJECT_DIR$/.idea/modules/post/silverpotion.post.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/user/silverpotion.user.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user/silverpotion.user.main.iml" />
     </modules>
   </component>
 </project>
