@@ -23,7 +23,7 @@ public class ReportController {
 
     @PostMapping("/create")
     public ResponseEntity<?> reportCreate(@RequestBody ReportCreateResDto reportCreateResDto
-            , @RequestHeader("X-User-Id") String loginId){
+            , @RequestHeader("X-User-LoginId") String loginId){
         Report report = reportService.reportCreate(reportCreateResDto,loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(),"신고 등록 완료",report),HttpStatus.CREATED);
     }
@@ -31,7 +31,7 @@ public class ReportController {
 //    신고 목록 조회
     @GetMapping("/list")
 //    @PreAuthorize("hasRole('ADMIN))
-    public ResponseEntity<?> getReportList(@RequestHeader("X-User-Id") String loginId, Pageable pageable, ReportRequestDto reportRequestDto){
+    public ResponseEntity<?> getReportList(@RequestHeader("X-User-LoginId") String loginId, Pageable pageable, ReportRequestDto reportRequestDto){
         Page<ReportResponseDto> reports = reportService.findAllReports(loginId, pageable,reportRequestDto);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"신고 유저 조회 성공",reports),HttpStatus.OK);
     }

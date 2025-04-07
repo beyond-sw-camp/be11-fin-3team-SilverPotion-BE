@@ -19,6 +19,6 @@ public class UserListDto {
   
   
     public static UserListDto fromEntity(User user) {
-        return new UserListDto(user.getId(), user.getName(), user.getNickName());
+        return new UserListDto(user.getId(), user.getName(), user.getNickName(), user.getProfileImage());
     }
 }

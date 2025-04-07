@@ -63,28 +63,28 @@ public class    UserController {
 
 //    3.회원정보수정(마이프로필 수정)
     @PatchMapping("/update")
-    public ResponseEntity<?> userUpdate(@RequestBody UserUpdateDto dto,@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> userUpdate(@RequestBody UserUpdateDto dto,@RequestHeader("X-User-LoginId")String loginId){
         Long id = userService.update(dto,loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "update success", id),HttpStatus.OK);
     }
 
 // 4.내 정보 조회(마이페이지 프로필 조회,여기에 연결된 보호자,피보호자이름도 조회할 수 있게 해놨는데 프론트에서는 아래 5,6번 쓰는게 더 나을 듯)
     @GetMapping("/myprofile")
-    public ResponseEntity<?> myProfile(@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> myProfile(@RequestHeader("X-User-LoginId")String loginId){
         UserMyPageDto dto = userService.userMyPage(loginId);
     return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "success",dto),HttpStatus.OK);
     }
 
 //   5. 연결된 피보호자 조회
     @GetMapping("/myDependentList")
-    public ResponseEntity<?> whoMyDependents(@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> whoMyDependents(@RequestHeader("X-User-LoginId")String loginId){
       List<UserLinkedUserDto>dependents = userService.whoMyDependents(loginId);
     return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"success",dependents ),HttpStatus.OK);
     }
 
 //    6.연결된 보호자 조회
     @GetMapping("/myProtectList")
-    public ResponseEntity<?> whoMyProtectors(@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> whoMyProtectors(@RequestHeader("X-User-LoginId")String loginId){
         List<UserLinkedUserDto>protectors = userService.whoMyProtectors(loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"success",protectors),HttpStatus.OK);
     }
@@ -117,12 +117,13 @@ public class    UserController {
     @GetMapping("/nickname")
     public String getUserByLoginId(@RequestParam Long id) {
         User user = userService.getUseridByNickName(id);
-        System.out.println("유저 정보조회 login ID:"+ user.getNickName());
+        System.out.println("유저 정보조회 login ID:" + user.getNickName());
         return user.getNickName();
+    }
 
     // 11. 프로필 이미지 등록 및 수정
     @PostMapping("/profileImg")
-    public ResponseEntity<?> postProfileImage(@RequestHeader("X-User-Id")String loginId,UserProfileImgDto dto){
+    public ResponseEntity<?> postProfileImage(@RequestHeader("X-User-LoginId")String loginId,UserProfileImgDto dto){
          String s3Url = userService.postProfileImage(loginId,dto);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "sucess",s3Url),HttpStatus.OK);
     }
@@ -159,7 +160,7 @@ public class    UserController {
 
     // 회원탈퇴
     @GetMapping("/withdraw")
-    public ResponseEntity<?> withdraw(@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> withdraw(@RequestHeader("X-User-LoginId")String loginId){
        String nickName = userService.withdraw(loginId);
        return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "goodbye...",nickName),HttpStatus.OK);
     }

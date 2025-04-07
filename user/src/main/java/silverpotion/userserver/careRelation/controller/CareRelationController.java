@@ -26,7 +26,7 @@ public class CareRelationController {
     // 1.연결 요청 보내기
 //    이때 로그인 아이디는 연결을 보내는 사람이니까 보호자가 될 유저.
     @PostMapping("/send")
-    public ResponseEntity<?> sendCareLink(@RequestBody CareRelationCreateDto dto, @RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> sendCareLink(@RequestBody CareRelationCreateDto dto, @RequestHeader("X-User-LoginId")String loginId){
         careRelationService.sendCareLink(dto,loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.CREATED.value(), "sending success","success"),HttpStatus.CREATED);
     }
@@ -34,7 +34,7 @@ public class CareRelationController {
     // 2.내가 받은 연결 요청 조회
 //    이때 로그인 아이디는 요청을 받은 사람이니까 피보호자가 될 유저
     @GetMapping("/checkLink")
-    public ResponseEntity<?> checkLink(@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> checkLink(@RequestHeader("X-User-LoginId")String loginId){
         List<CareRelationListDto> list = careRelationService.checkLink(loginId);
         return new ResponseEntity(new CommonDto(HttpStatus.OK.value(), "list is uploaded successfully",list),HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class CareRelationController {
     // 3.연결 요청 수락 혹은 거절
 //    이때 로그인 아이디는 요청을 받은 사람이니까 피보호자가 될 유저
     @PostMapping("/chooseRelation")
-    public ResponseEntity<?> acceptOrNot(@RequestBody CareRelationAcceptOrNotDto dto, @RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> acceptOrNot(@RequestBody CareRelationAcceptOrNotDto dto, @RequestHeader("X-User-LoginId")String loginId){
         Map<Long,String> info = careRelationService.acceptOrNot(dto,loginId);
         if(info.get(dto.getCareRelationId()).equals("accept")){
             return new ResponseEntity(new CommonDto(HttpStatus.OK.value(), "link success",dto.getCareRelationId()),HttpStatus.OK);
@@ -54,14 +54,14 @@ public class CareRelationController {
 
     // 4.보호자 연결 끊기
     @PostMapping("/disconnectProtector")
-    public ResponseEntity<?> disconnect(@RequestBody CareRelationDisconnectDto dto,@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> disconnect(@RequestBody CareRelationDisconnectDto dto,@RequestHeader("X-User-LoginId")String loginId){
         String protectorName =  careRelationService.disconnect(dto,loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"relation is disconnected",protectorName),HttpStatus.OK);
     }
 
     //  5.피보호자 연결 끊기
     @PostMapping("/disconnectDependent")
-    public ResponseEntity<?> disconnectDependent(@RequestBody CareRelationDisconnectDto dto,@RequestHeader("X-User-Id")String loginId){
+    public ResponseEntity<?> disconnectDependent(@RequestBody CareRelationDisconnectDto dto,@RequestHeader("X-User-LoginId")String loginId){
         String dependentName =  careRelationService.disconnectDependent(dto,loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"relation is disconnected",dependentName),HttpStatus.OK);
     }
