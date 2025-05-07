@@ -150,7 +150,130 @@
 
 ## 📑 UI/UX 단위 테스트 결과서 (프론트엔드 설계 및 구축)
 - 사용성 테스트, 인터페이스 반응
-  👉 [📎 문서 보기](./docs/UIUX_단위_테스트_결과서.pdf)
+<details>
+  
+  #### - 로그인 및 회원가입-
+  <summary> 메인페이지</summary>
+  <img src="https://github.com/user-attachments/assets/ce63f6ff-f5cc-4443-9efb-f820880f8d4e">
+</details>
+<details>
+  <summary> 로그인</summary>
+  <img src="https://github.com/user-attachments/assets/2f7c077f-405e-4c20-bb93-af7a07b89b98">
+</details>
+<details>
+  <summary> 회원가입</summary>
+  <img src="https://github.com/user-attachments/assets/9508ba22-b7f4-4c24-8a6f-a92672c15033">
+</details>
+<details>
+  <summary> google회원가입</summary>
+  <img src="https://github.com/user-attachments/assets/e3166d3f-907f-4832-9da9-de28b41c83a9">
+</details>
+<details>
+  <summary> google로그인</summary>
+  <img src="https://github.com/user-attachments/assets/1c86ba7e-5bee-4df7-9d65-3e162ed321e7">
+</details>
+<details>
+  <summary> kakao회원가입</summary>
+  <img src="https://github.com/user-attachments/assets/1632c825-7dc9-4b74-af3d-65fa215f6d2a">
+</details>
+<details>
+  <summary> kakao로그인</summary>
+  <img src="https://github.com/user-attachments/assets/8f41d775-5e67-451b-add9-dde3da76ce83">
+</details>
+
+
+#### - 건강데이터-
+<details>
+<summary> 본인 건강데이터 조회</summary>
+  <img src="https://github.com/user-attachments/assets/bc686a90-6390-434c-a203-db31bed34d6c">
+</details>
+<details>
+<summary> 본인 AI리포트 조회</summary>
+  <img src="https://github.com/user-attachments/assets/b873fd13-2216-44c1-b261-be22454be71d">
+</details>
+<details>
+<summary> 피보호자 데이터 조회</summary>
+  <img src="https://github.com/user-attachments/assets/d20a3eeb-4097-436a-84e0-a9d3f6d89df5">
+</details>
+<details>
+<summary> 피보호자 리포트 조회</summary>
+  <img src="https://github.com/user-attachments/assets/b5b91708-a8b7-4445-a90d-4cfd2b984de6">
+</details>
+<details>
+<summary> 헬스지수 생성 및 조회</summary>
+  <img src="https://github.com/user-attachments/assets/c808c8d3-86b9-4204-b656-fd693bc41792">
+</details>
+<details>
+<summary> 건강데이터기반 모임 추천</summary>
+  <img src="https://github.com/user-attachments/assets/2f42a962-f86c-46df-bf41-1719040c6b77">
+</details>
+
+#### - 모임-
+<details>
+<summary>소모임 생성</summary>
+  <img src="https://github.com/user-attachments/assets/a2f80d17-514c-47e7-bfc5-520dddc41767">
+</details>
+<details>
+<summary>모임 가입</summary>
+  <img src="https://github.com/user-attachments/assets/6d07924a-a5f9-4962-b748-65939a0b947d">
+</details>
+<details>
+<summary>정모 만들기</summary>
+  <img src="https://github.com/user-attachments/assets/0c7f2a8a-0d39-4e6e-b5e0-d5cff0914341">
+</details>
+<details>
+<summary>게시판 전체 조회</summary>
+  <img src="https://github.com/user-attachments/assets/cc560fd8-1362-45fb-9e20-cc46cca1ba4c">
+</details>
+<details>
+<summary>게시판 좋아요</summary>
+  <img src="https://github.com/user-attachments/assets/f55173b2-758c-424d-b186-425e05b66496">
+</details>
+<details>
+<summary>투표 상세 조회</summary>
+  <img src="https://github.com/user-attachments/assets/ddb25aa4-55da-416b-98d5-8683b8dbf972">
+</details>
+<details>
+<summary>투표 항목 유저 조회</summary>
+  <img src="https://github.com/user-attachments/assets/95a78184-620d-4961-a0e6-b5fa75eb0c3a">
+</details>
+<details>
+<summary>자유글 생성</summary>
+  <img src="https://github.com/user-attachments/assets/9e7d2c53-6010-4e9a-879d-4357967696e8">
+</details>
+<details>
+<summary>공지글 생성</summary>
+  <img src="https://github.com/user-attachments/assets/3262c7b0-84ef-46c4-9f9a-884f9310cbca">
+</details>
+<details>
+<summary>투표글 생성</summary>
+  <img src="https://github.com/user-attachments/assets/aaf6571c-31db-471b-8c24-a3a157897174">
+</details>
+
+#### - 채팅-
+<details>
+<summary>채팅</summary>
+  <img src="https://github.com/user-attachments/assets/88f8c827-64be-4730-8e2b-11729f3629a4">
+</details>
+
+#### - 마이캘린더-
+
+#### - 관리자페이지-
+<details>
+<summary>관리자유저목록</summary>
+  <img src="https://github.com/user-attachments/assets/fa7bc019-0525-4bba-a9c3-b278d7c9cc01">
+</details>
+<details>
+<summary>관리자유저검색</summary>
+  <img src="https://github.com/user-attachments/assets/3098032e-795d-4b54-b5c1-f3170125a878">
+</details>
+<details>
+<summary>관리자유저상세</summary>
+  <img src="https://github.com/user-attachments/assets/cac69a2b-8171-4f4d-bf42-ae892340ba43">
+</details>
+
+
+
 
 ---
 
