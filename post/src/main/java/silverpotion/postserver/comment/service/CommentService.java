@@ -73,13 +73,22 @@ public class CommentService {
         commentRepository.save(comment);
 
         //댓글 알림발송
-        String writerLoginId = userClient.getNicknameByUserId(post.getWriterId());
+        String writerLoginId = null;
+        Long referenceId = null;
+        if(post != null){
+            writerLoginId = userClient.getNicknameByUserId(post.getWriterId());
+            referenceId = post.getId();
+        }
+        else if(vote != null){
+            writerLoginId = userClient.getNicknameByUserId(vote.getWriterId());
+            referenceId = vote.getVoteId();
+        }
         NotificationMessageDto notification = NotificationMessageDto.builder()
                 .loginId(writerLoginId)
                 .title("댓글 알림")
                 .content("'" + userProfileInfoDto.getNickname() + "'님이 회원님의 게시글에 댓글을 달았습니다.")
                 .type("VOTE_LIKED")
-                .referenceId(post.getId())
+                .referenceId(referenceId)
                 .build();
 
         notificationProducer.sendNotification(notification);

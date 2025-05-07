@@ -124,7 +124,7 @@ public class PostController {
     public ResponseEntity<?> getVoteList(@RequestParam(name = "page", defaultValue = "0") Integer page,
                                            @RequestParam(name = "size", defaultValue = "5") Integer size,
                                            @RequestHeader("X-User-LoginId") String loginId){
-        Page<VoteResListDto> voteList = postService.getVoteList(page,size,loginId);
+        Page<VoteResListDto> voteList = postService.getVoteList(page,size,loginId)
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(),"투표글 리스트 불러오기 완료",voteList),HttpStatus.OK);
     }
 

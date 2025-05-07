@@ -24,7 +24,7 @@ spring:
     generate-ddl: true
     hibernate:
       #      ddl-auto: create
-      ddl-auto: create
+      ddl-auto: update
     show_sql: true
   application:
     #   여기서는 쿠버네티스의 서비스 이름과 일치해야할 이름

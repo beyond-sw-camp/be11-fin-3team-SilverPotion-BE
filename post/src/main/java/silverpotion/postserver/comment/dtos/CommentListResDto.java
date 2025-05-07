@@ -1,5 +1,6 @@
 package silverpotion.postserver.comment.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,7 @@ public class CommentListResDto {
     private String isUpdate;
     private DelYN delYn;
     private String isLike;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createdTime;
 
     public static CommentListResDto fromEntity(Comment comment, Long likeCount, String isLike, UserProfileInfoDto userProfileInfoDto) {
