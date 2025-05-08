@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import silverpotion.postserver.common.dto.CommonDto;
+import silverpotion.postserver.gathering.dto.GatheringInfoDto;
 import silverpotion.postserver.meeting.dto.MeetingAttendDto;
 import silverpotion.postserver.meeting.dto.MeetingCreateDto;
 import silverpotion.postserver.meeting.dto.MeetingInfoDto;
@@ -92,5 +93,22 @@ public class MeetingController {
             @RequestHeader("X-User-LoginId") String loginId) {
         meetingService.deleteMeeting(meetingId, loginId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "정모가 삭제되었습니다.", meetingId), HttpStatus.OK);
+    }
+
+    // 주변 정모 검색
+    @GetMapping("/nearby")
+    public ResponseEntity<List<MeetingInfoDto>> getNearbyMeetings(
+            @RequestParam double lat,
+            @RequestParam double lon,
+            @RequestParam(defaultValue = "2") double radius) {
+        List<MeetingInfoDto> nearbyMeetings = meetingService.findNearbyMeetings(lat, lon, radius);
+        return ResponseEntity.ok(nearbyMeetings);
+    }
+
+    // 내 정모 조회
+    @GetMapping("/mymeetings")
+    public ResponseEntity<?> getMyMeetings(@RequestHeader("X-User-LoginId") String loginId) {
+        List<MeetingInfoDto> dtos = meetingService.getMyMeetings(loginId);
+        return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "내가 속한 정모들이 조회되었습니다.", dtos), HttpStatus.OK);
     }
 }

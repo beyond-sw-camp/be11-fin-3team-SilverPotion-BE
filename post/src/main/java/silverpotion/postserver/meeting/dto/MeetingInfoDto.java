@@ -22,6 +22,8 @@ public class MeetingInfoDto {
     private String imageUrl;
     private Long cost;
     private Long maxPeople;
+    private Double lat;
+    private Double lon;
     // 참석자 리스트 추가
     private List<AttendeeDto> attendees;
 }

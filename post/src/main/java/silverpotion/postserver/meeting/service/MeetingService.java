@@ -8,6 +8,8 @@ import silverpotion.postserver.calendar.service.CalendarService;
 import silverpotion.postserver.common.domain.DelYN;
 import silverpotion.postserver.common.service.ImageService;
 import silverpotion.postserver.gathering.domain.Gathering;
+import silverpotion.postserver.gathering.domain.Status;
+import silverpotion.postserver.gathering.dto.GatheringInfoDto;
 import silverpotion.postserver.gathering.repository.GatheringRepository;
 import silverpotion.postserver.meeting.domain.Meeting;
 import silverpotion.postserver.meeting.domain.MeetingParticipant;
@@ -94,6 +96,8 @@ public class MeetingService {
                 .cost(dto.getCost())
                 .maxPeople(dto.getMaxPeople())
                 .imageUrl(imageUrl)
+                .lon(dto.getLon())
+                .lat(dto.getLat())
                 .build();
 
         meetingRepository.save(meeting);
@@ -197,6 +201,8 @@ public class MeetingService {
                     meeting.getImageUrl(),
                     meeting.getCost(),
                     meeting.getMaxPeople(),
+                    meeting.getLat(),
+                    meeting.getLon(),
                     attendees
             );
         }).collect(Collectors.toList());
@@ -266,6 +272,8 @@ public class MeetingService {
                 meeting.getImageUrl(),
                 meeting.getCost(),
                 meeting.getMaxPeople(),
+                meeting.getLat(),
+                meeting.getLon(),
                 attendees
         );
     }
@@ -300,6 +308,8 @@ public class MeetingService {
                             meeting.getImageUrl(),
                             meeting.getCost(),
                             meeting.getMaxPeople(),
+                            meeting.getLat(),
+                            meeting.getLon(),
                             attendees
                     );
                 })
@@ -330,6 +340,110 @@ public class MeetingService {
 
         // OpenSearch 연동한다면 이 부분에서 삭제 처리 가능
 //        openSearchService.indexMeeting(meeting);
+    }
+
+    public List<MeetingInfoDto> findNearbyMeetings(double lat, double lon, double radius) {
+        // 현재 시간 이후의 정모만 가져오기
+        LocalDateTime now = LocalDateTime.now();
+
+        // 모든 정모 가져오기 (실제로는 DB 쿼리 최적화 필요)
+        List<Meeting> allMeetings = meetingRepository.findByMeetingDateAfterOrMeetingDateEqualsAndMeetingTimeAfterAndDelYN(
+                now.toLocalDate(), now.toLocalDate(), now.toLocalTime(), DelYN.N);
+
+        // 거리 계산 및 필터링
+        List<Meeting> nearbyMeetings = allMeetings.stream()
+                .filter(meeting -> meeting.getLat() != null && meeting.getLon() != null)
+                .filter(meeting -> calculateDistance(lat, lon, meeting.getLat(), meeting.getLon()) <= radius)
+                .collect(Collectors.toList());
+
+        // DTO로 변환
+        return nearbyMeetings.stream()
+                .map(meeting -> {
+                    List<MeetingParticipant> participants = meetingParticipantRepository.findByMeetingId(meeting.getId());
+
+                    List<AttendeeDto> attendees = participants.stream().map(participant -> {
+                        UserProfileInfoDto profileInfo = userClient.getUserProfileInfo(participant.getUserId());
+                        return new AttendeeDto(participant.getUserId(), profileInfo.getNickname(), profileInfo.getProfileImage());
+                    }).collect(Collectors.toList());
+
+                    return new MeetingInfoDto(
+                            meeting.getId(),
+                            meeting.getGathering().getId(),
+                            meeting.getName(),
+                            meeting.getMeetingDate(),
+                            meeting.getMeetingTime(),
+                            meeting.getPlace(),
+                            meeting.getImageUrl(),
+                            meeting.getCost(),
+                            meeting.getMaxPeople(),
+                            meeting.getLat(),
+                            meeting.getLon(),
+                            attendees
+                    );
+                })
+                .collect(Collectors.toList());
+    }
+
+    // Haversine 공식을 사용한 거리 계산 (km 단위)
+    private double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // 지구 반지름 (km)
+
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        return R * c;
+    }
+
+    // 내 정모 조회
+    public List<MeetingInfoDto> getMyMeetings(String loginId) {
+        // loginId로 userId 조회
+        Long userId = userClient.getUserIdByLoginId(loginId);
+
+        // MeetingParticipant 테이블에서 사용자가 가입한 meetingId 가져오기
+        List<Long> meetingIds = meetingParticipantRepository.findByUserId(userId)
+                .stream()
+                .map(mp -> mp.getMeeting().getId())
+                .collect(Collectors.toList());
+
+        LocalDateTime now = LocalDateTime.now();
+
+        // Meeting 테이블에서 해당 meeting 정보 가져오기
+        return meetingRepository.findByIdIn(meetingIds)
+                .stream()
+                .filter(meeting -> {
+                    LocalDateTime meetingDateTime = LocalDateTime.of(meeting.getMeetingDate(), meeting.getMeetingTime());
+                    return !meetingDateTime.isBefore(now);
+                })
+                .map(meeting -> {
+                    List<MeetingParticipant> participants = meetingParticipantRepository.findByMeetingId(meeting.getId());
+
+                    List<AttendeeDto> attendees = participants.stream().map(participant -> {
+                        UserProfileInfoDto profileInfo = userClient.getUserProfileInfo(participant.getUserId());
+                        return new AttendeeDto(participant.getUserId(), profileInfo.getNickname(), profileInfo.getProfileImage());
+                    }).collect(Collectors.toList());
+
+                    return new MeetingInfoDto(
+                            meeting.getId(),
+                            meeting.getGathering().getId(),
+                            meeting.getName(),
+                            meeting.getMeetingDate(),
+                            meeting.getMeetingTime(),
+                            meeting.getPlace(),
+                            meeting.getImageUrl(),
+                            meeting.getCost(),
+                            meeting.getMaxPeople(),
+                            meeting.getLat(),
+                            meeting.getLon(),
+                            attendees
+                    );
+                })
+                .collect(Collectors.toList());
     }
 
 //    // opensearch

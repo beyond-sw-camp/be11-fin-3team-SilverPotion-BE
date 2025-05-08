@@ -20,4 +20,6 @@ public class MeetingCreateDto {
     private MultipartFile imageFile;
     private Long cost;
     private Long maxPeople;
+    private Double lat;
+    private Double lon;
 }

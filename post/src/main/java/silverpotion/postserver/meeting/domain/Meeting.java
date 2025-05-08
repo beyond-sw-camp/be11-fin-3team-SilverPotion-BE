@@ -43,6 +43,12 @@ public class Meeting {
     @Column(nullable = false)
     private Long maxPeople;    //정원
 
+    @Column(nullable = false)
+    private Double lat;    //위도
+
+    @Column(nullable = false)
+    private Double lon;    //경도
+
     @Builder.Default
     @Enumerated(EnumType.STRING )
     private DelYN delYN=DelYN.N;    //삭제여부
