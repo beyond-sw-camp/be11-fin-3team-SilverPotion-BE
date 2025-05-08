@@ -40,6 +40,7 @@ public class KafkaSseService {
         try {
             String message = objectMapper.writeValueAsString(dto);
             kafkaTemplate.send("chat-topic", message);
+            log.info("📡 메시지 Kafka 발행됨: {}", message); // 발행된 메시지 확인
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -53,22 +54,25 @@ public class KafkaSseService {
     public void consumeChatMessage(String messageJson) {
         log.warn("🔥 WebSocket Kafka Consumer 실행됨 @{}", System.identityHashCode(this));
         try {
+            // 메시지가 Kafka에서 수신되는지 확인하는 로그 추가
+            log.info("📡 수신된 메시지: {}", messageJson);
+
             ChatMessageDto message = objectMapper.readValue(messageJson, ChatMessageDto.class);
 
             List<String> loginIds = chatParticipantRepository.findLoginIdsByRoomId(message.getRoomId());
-            System.out.println("consumeChatMessage List : " + loginIds);
-            // ✅ 현재 연결된 유저 세션 확인
-            System.out.println("🧩 연결된 유저 목록: " + simpUserRegistry.getUsers().stream().map(SimpUser::getName).toList());
+            log.info("🧩 연결된 유저 목록: {}", simpUserRegistry.getUsers().stream().map(SimpUser::getName).toList());
             log.info("📡 전송할 메시지 내용: {}", message);
+
             // 개인 WebSocket 세션으로 쏘는 방식으로 수정
             for (String loginId : loginIds) {
-                System.out.println("🧩 대상 loginId = " + loginId);
-                System.out.println("🧩 messagingTemplate.convertAndSendToUser() 호출 직전");
+                log.info("🧩 대상 loginId = {}", loginId);
                 boolean hasUser = simpUserRegistry.getUser(loginId) != null;
-                System.out.println("🧩 SimpUserRegistry에 해당 유저 존재? = " + hasUser);
-                messagingTemplate.convertAndSendToUser(loginId, "/chat", message);
-                log.info("📡 WebSocket 전송 → /user/{}/chat", loginId);
+                log.info("🧩 SimpUserRegistry에 해당 유저 존재? = {}", hasUser);
 
+                if (hasUser) {
+                    messagingTemplate.convertAndSendToUser(loginId, "/chat", message);
+                    log.info("📡 WebSocket 전송 → /user/{}/chat", loginId);
+                }
             }
         } catch (Exception e) {
             log.error("❌ WebSocket Kafka Consumer 오류", e);

@@ -52,6 +52,10 @@ dependencies {
 	implementation 'org.springframework.kafka:spring-kafka'
 	//dateTime 의존성
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+	//sse
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
 }
 
 dependencyManagement {

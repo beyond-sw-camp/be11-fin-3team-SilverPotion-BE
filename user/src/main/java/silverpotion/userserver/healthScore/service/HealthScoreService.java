@@ -22,6 +22,7 @@ import silverpotion.userserver.userDetailHealthInfo.domain.UserDetailHealthInfo;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -58,46 +59,45 @@ public class HealthScoreService {
         User selectedUser = null;
         if(isMyId){
             selectedUser = loginUser;
-            if(selectedUser.getUserDetailHealthInfo()==null){
-                throw new IllegalArgumentException("건강상세정보를 등록하지 않아 이용할 수 없습니다");
-            }
+
         } else{
             selectedUser = userRepository.findByLoginIdAndDelYN(dto.getUserId(),DelYN.N).orElseThrow(()->new EntityNotFoundException("선택된 회원은 없는 회원입니다"));
-                throw new IllegalArgumentException("건강상세정보를 등록하지 않아 이용할 수 없습니다");
+
+        }
+        if(selectedUser.getUserDetailHealthInfo()==null){
+            throw new IllegalArgumentException("건강상세정보를 등록하지 않아 이용할 수 없습니다");
         }
 
        LocalDate selectedDate = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         Type type = Type.valueOf(dto.getType());
         DataType dataType = DataType.valueOf(dto.getType());
+        //기존에 이미 조회하려는 헬스스코어가 있는 지 확인
+        Optional<HealthScore> optionalHealthScore = healthScoreRepository.findByUserIdAndCreatedDateAndType(selectedUser.getId(), selectedDate, type);
         HealthScore healthScore;
-        try {
-           healthScore = healthScoreRepository.findByUserIdAndCreatedDateAndType(selectedUser.getId(), selectedDate, type).orElseThrow(() -> new EntityNotFoundException("데이터가 없습니다"));
-        } catch (EntityNotFoundException e){
-           HealthData healthData = selectedUser.getMyHealthData().stream().filter(h->h.getDataType().equals(dataType)).filter(c->c.getCreatedDate().equals(selectedDate)).findFirst().orElseThrow(()->new EntityNotFoundException("데이터가 없습니다2"));
+
+        //헬스스코어가 있다면 가져오고
+        if(optionalHealthScore.isPresent()){
+            healthScore = healthScoreRepository.findByUserIdAndCreatedDateAndType(selectedUser.getId(), selectedDate, type).orElseThrow(() -> new EntityNotFoundException("데이터가 없습니다"));
+        } else{
+           //헬스스코어가 없다면 생성
+            HealthData healthData = selectedUser.getMyHealthData().stream().filter(h->h.getDataType().equals(dataType)).filter(c->c.getCreatedDate().equals(selectedDate)).findFirst().orElseThrow(()->new EntityNotFoundException("데이터가 없습니다2"));
 //            방법 2
 //            HealthData healthData = healthDataRepository.findByUserIdAndCreatedDateAndDataType(selectedUser.getId(), selectedDate, dataType).orElseThrow(()-> new EntityNotFoundException("데이터가 없습니다"));
             UserDetailHealthInfo info = selectedUser.getUserDetailHealthInfo();
 
-          int activityScore =  HealthScoreUtils.whatsMyActivityScore(healthData,info,selectedUser);
-          int bodyScore =HealthScoreUtils.whatsMybodyScore(healthData,info,selectedUser);
-          int habitScore =HealthScoreUtils.whatsMyHabitScore(info);
-          int totalScore = HealthScoreUtils.totalScore(activityScore,bodyScore,habitScore);
+            int activityScore =  HealthScoreUtils.whatsMyActivityScore(healthData,info,selectedUser);
+            int bodyScore =HealthScoreUtils.whatsMybodyScore(healthData,info,selectedUser);
+            int habitScore =HealthScoreUtils.whatsMyHabitScore(info);
+            int totalScore = HealthScoreUtils.totalScore(activityScore,bodyScore,habitScore);
 
-        healthScore =  HealthScore.builder().totalScore(totalScore).activityScore(activityScore).bodyScore(bodyScore)
-                .habitScore(habitScore).type(type).user(selectedUser).createdDate(selectedDate).build();
+            healthScore =  HealthScore.builder().totalScore(totalScore).activityScore(activityScore).bodyScore(bodyScore)
+                    .habitScore(habitScore).type(type).user(selectedUser).createdDate(selectedDate).build();
 
-        healthScoreRepository.save(healthScore);
-        selectedUser.getHealthScores().add(healthScore);
+            healthScoreRepository.save(healthScore);
+            selectedUser.getHealthScores().add(healthScore);
         }
+
         return healthScore.toDto();
-
-
-
-
-
-
-
-
 
     }
 

@@ -26,7 +26,7 @@
 //        this.monthlyAverageHealthJob = monthlyAverageHealthJob;
 //    }
 //    // 0. 일간 헬스리포트 생성
-//    @Scheduled(fixedRate = 600000) //10분마다 실행(테스트용)
+//    @Scheduled(fixedRate = 6000000) //10분마다 실행(테스트용)
 ////    @Scheduled(cron = "0 0 1 * * *") // 매일 새벽 1시마다 실행
 //    public void runDailyHealthReportJob(){
 //
@@ -43,7 +43,7 @@
 //    }
 //
 ////// 1. 주간 평균 헬스데이터,헬스리포트 생성
-//    @Scheduled(fixedRate = 600000) //10분마다 실행(테스트용)
+//    @Scheduled(fixedRate = 6000000) //10분마다 실행(테스트용)
 ////    @Scheduled(cron = "0 0 0 * * MON") // 매주 월요일 마다 실행
 //    public void runWeeklyHealthDataJob(){
 //
@@ -60,7 +60,7 @@
 //    }
 //
 ////   3. 월간 헬스데이터,헬스리포트 생성
-//    @Scheduled(fixedRate = 600000) //10분마다 실행(테스트용)
+//    @Scheduled(fixedRate = 6000000) //10분마다 실행(테스트용)
 //    //    @Scheduled(cron = "0 0 0 1 * *") // 매달 1일 마다 실행
 //    public void runMonthlyHealthDataJob(){
 //

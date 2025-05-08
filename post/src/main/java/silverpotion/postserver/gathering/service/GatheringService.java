@@ -319,6 +319,7 @@ public class GatheringService {
         return gatheringPeopleList.stream().map(gatheringPeople -> {
             // User 정보 조회
             UserProfileInfoDto profileInfo = userClient.getUserProfileInfo(gatheringPeople.getUserId());
+            String loginId = userClient.getLoginIdByUserId(gatheringPeople.getUserId());
 
             return new GatheringPeopleDto(
                     gatheringPeople.getId(),
@@ -328,7 +329,8 @@ public class GatheringService {
                     profileInfo.getProfileImage(),
                     gatheringPeople.getGreetingMessage(),
                     gatheringPeople.getStatus().name(),  // Enum -> String 변환
-                    gatheringPeople.getCreatedTime()
+                    gatheringPeople.getCreatedTime(),
+                    loginId
             );
         }).collect(Collectors.toList());
     }
@@ -368,10 +370,14 @@ public class GatheringService {
                 .greetingMessage(dto.getGreetingMessage())
                 .status(Status.WAIT) // 기본 상태
                 .build();
+        // DB 저장
+        gatheringPeopleRepository.save(gatheringPeople);
 
+        // 알림발송
         Long gatheringLeaderId = gathering.getLeaderId();
         String gatheringLeaderLoginId = userClient.getLoginIdByUserId(gatheringLeaderId);
         String userNickname = userClient.getNicknameByUserId(userId);
+        System.out.println("모임장 id: "+gatheringLeaderId+" 모임장 로그인id: " + gatheringLeaderLoginId + " 신청자닉네임: "+userNickname);
 
         notificationProducer.sendNotification(NotificationMessageDto.builder()
                 .loginId(gatheringLeaderLoginId)
@@ -403,7 +409,7 @@ public class GatheringService {
         // 상태 변경
         gatheringPeople.updateStatus(dto.getStatus());
 
-        // 저장
+        gatheringPeopleRepository.save(gatheringPeople);
         if (gatheringPeople.getStatus() == Status.ACTIVATE) {
             // 가입 승인시 알림 발송
             NotificationMessageDto notification = NotificationMessageDto.builder()
@@ -442,7 +448,6 @@ public class GatheringService {
             // 채팅 참여자 제거 로직 (선택)
             // chatFeignClient.removeParticipant(...);
         }
-        gatheringPeopleRepository.save(gatheringPeople);
     }
 
     // 모임장 양도

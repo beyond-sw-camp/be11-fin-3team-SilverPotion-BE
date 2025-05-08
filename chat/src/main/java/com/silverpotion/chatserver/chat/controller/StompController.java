@@ -13,6 +13,7 @@ import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 @Controller
@@ -50,13 +51,15 @@ public class StompController {
     private ChatMessageDto parseMessage(Message<?> message) {
         try {
             String payload;
+
             if (message.getPayload() instanceof byte[]) {
-                payload = new String((byte[]) message.getPayload());
+                payload = new String((byte[]) message.getPayload(), StandardCharsets.UTF_8);
             } else {
                 payload = message.getPayload().toString();
             }
 
             System.out.println("📨 수신된 raw payload = " + payload);
+
             return objectMapper.readValue(payload, ChatMessageDto.class);
         } catch (Exception e) {
             e.printStackTrace();

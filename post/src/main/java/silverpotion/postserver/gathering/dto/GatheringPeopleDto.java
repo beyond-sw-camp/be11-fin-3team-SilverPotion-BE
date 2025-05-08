@@ -18,4 +18,5 @@ public class GatheringPeopleDto {
     private String introduce;
     private String status;
     private LocalDateTime createdTime;
+    private String loginId;
 }

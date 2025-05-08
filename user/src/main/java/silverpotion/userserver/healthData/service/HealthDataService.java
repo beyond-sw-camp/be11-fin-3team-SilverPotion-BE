@@ -242,11 +242,24 @@ public class HealthDataService {
             selectedUser = userRepository.findByLoginIdAndDelYN(dto.getLoginId(),DelYN.N).orElseThrow(()->new EntityNotFoundException("없는 회원입니다"));
         }
 
+        LocalDate today = LocalDate.now();
         LocalDate selectedDate =LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         DataType selectedType = DataType.valueOf(dto.getType());
-        System.out.println(selectedDate);
+//   일단 중단
+        Optional<HealthData> dataOpt = healthDataRepository.findByUserIdAndCreatedDateAndDataType(selectedUser.getId(),selectedDate,selectedType);
+       //내가 실시간으로 오늘  상대방의 데이터를 보려는데 없다면, 즉 상대방의 데이터중 오늘 실시간 데이터를 보려고 할 때 fcm메세지를 보내 데이터를 받아옴
+        if(dataOpt.isEmpty() && selectedType ==DataType.DAY && selectedDate.equals(today)){
+           String token = selectedUser.getFireBaseToken();
+           fireBaseService.sendHealthSyncReq(token);
+            try {
+                Thread.sleep(1000); // 3초 대기
+            } catch (InterruptedException ignored) {}
+            dataOpt =healthDataRepository.findByUserIdAndCreatedDateAndDataType(selectedUser.getId(),selectedDate,selectedType);
+        }
 
-        HealthData selectedData = healthDataRepository.findByUserIdAndCreatedDateAndDataType(selectedUser.getId(), selectedDate,selectedType).orElseThrow(()->new EntityNotFoundException("해당 데이터가 존재하지 않습니다"));
+        HealthData selectedData = dataOpt.orElseThrow(()->new EntityNotFoundException("해당 데이터가 존재하지 않습니다"));
+
+        //헬스데이터랑 타겟칼로리랑 타켓 걸음 같이 리턴
         int targetCalories =0;
         int targetSteps =0;
         UserDetailHealthInfo info = selectedUser.getUserDetailHealthInfo();
