@@ -20,7 +20,8 @@ public interface PostQueryRepository extends JpaRepository<Post, Long> {
             p.view_count AS viewCount,
             NULL AS multipleChoice,
             NULL AS voteOptions,
-            p.post_category AS postCategory
+            p.post_category AS postCategory,
+            'POST' AS postType
          FROM post p
          WHERE p.del_yn = 'N' AND p.post_status = 'fin' AND p.gathering_id = :gatheringId)
 
@@ -34,7 +35,8 @@ public interface PostQueryRepository extends JpaRepository<Post, Long> {
             NULL AS viewCount,
             v.multiple_choice AS multipleChoice,
             NULL AS voteOptions,
-            v.post_category AS postCategory
+            v.post_category AS postCategory,
+            'VOTE' AS postType
          FROM vote v
          WHERE v.del_yn = 'N' AND v.post_status = 'fin' AND v.gathering_id = :gatheringId)
 

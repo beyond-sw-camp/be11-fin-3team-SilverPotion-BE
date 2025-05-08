@@ -97,7 +97,6 @@ public class PostController {
                                          @PathVariable Long gatheringId
                                          ) {
         Page<PostVoteResDTO> postListResDtos = postService.getPostAndVoteList(gatheringId,page, size,loginId);
-        System.out.println(gatheringId);
         return new ResponseEntity<>(new CommonDto(HttpStatus.OK.value(), "게시물 리스트 불러오기 완료", postListResDtos), HttpStatus.OK);
     }
 

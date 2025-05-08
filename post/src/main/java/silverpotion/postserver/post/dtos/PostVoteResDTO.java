@@ -38,6 +38,7 @@ public class PostVoteResDTO {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime closeTime;
     private boolean participating;
+    private String postType;// post/vote
 
     public void setVoteOptions(List<VoteOptions> options){
         this.voteOptions = options.stream().map(VoteOptions::getOptionText).collect(Collectors.toList());

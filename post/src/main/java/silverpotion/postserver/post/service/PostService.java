@@ -339,7 +339,7 @@
                 userProfileInfoDto = userClient.getUserProfileInfo(writerId);
                 isParticipants = voteAnswerRepository.existsByUserIdAndVoteId(userId, vote.getVoteId());
                 closeTime = vote.getCloseTime();
-                likeCount = postLikeRepository.countPostLikes(dto.getId());
+                likeCount = voteLikeRepository.countByVoteId(dto.getId());
                 commentCount = commentRepository.countPostComments(dto.getId());
             } else {
                 throw new IllegalArgumentException("잘못된 게시물형식입니다");
@@ -366,6 +366,7 @@
                     .imageUrls(imageUrls)
                     .closeTime(closeTime)
                     .participating(isParticipants)
+                    .postType(dto.getPostType())
                     .build();
         }
 

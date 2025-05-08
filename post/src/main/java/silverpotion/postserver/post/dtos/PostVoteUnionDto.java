@@ -11,7 +11,7 @@ public interface PostVoteUnionDto {
     String getTitle();
     String getContent();//post.content or vote.description
     LocalDateTime getCreatedAt();
-    String getType(); //post or vote
+    String getPostType(); //post or vote
     String getNickname();
     String getProfileImage();
     PostCategory getPostCategory();
