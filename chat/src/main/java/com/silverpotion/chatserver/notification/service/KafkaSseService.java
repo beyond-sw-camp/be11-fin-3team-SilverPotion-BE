@@ -8,7 +8,8 @@ import com.silverpotion.chatserver.chat.dto.ChatMessageDto;
 import com.silverpotion.chatserver.chat.repository.ChatParticipantRepository;
 import com.silverpotion.chatserver.notification.controller.SseController;
 import com.silverpotion.chatserver.notification.domain.Notification;
-import com.silverpotion.chatserver.notification.dto.NotificationRequestDto;
+import com.silverpotion.chatserver.notification.dto.NotificationCreateDto;
+import com.silverpotion.chatserver.notification.dto.NotificationMessageDto;
 import com.silverpotion.chatserver.notification.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -88,8 +89,8 @@ public class KafkaSseService {
     public void consumeNotification(String messageJson) {
         log.info("📨 알림 Kafka 수신됨: {}", messageJson);
         try {
-            NotificationRequestDto dto = objectMapper.readValue(messageJson, NotificationRequestDto.class);
-
+            NotificationCreateDto dto = objectMapper.readValue(messageJson, NotificationCreateDto.class);
+            LocalDateTime now = LocalDateTime.now();
             // 🔸 DB에 저장
             Notification notification = Notification.builder()
                     .loginId(dto.getLoginId())
@@ -103,13 +104,13 @@ public class KafkaSseService {
             notificationRepository.save(notification);
 
             // 🔸 SSE 전송
-            ChatMessageDto message = ChatMessageDto.builder()
-                    .senderId(0L)
-                    .senderNickName("알림")
-                    .roomId(0L)  // 알림 전용이면 0L 또는 dto.getReferenceId() 사용
+            NotificationMessageDto message = NotificationMessageDto.builder()
+                    .loginId(dto.getLoginId())
+                    .title(dto.getTitle())
                     .content(dto.getContent())
-                    .type(MessageType.SYSTEM) // enum 변환
-                    .createdAt(LocalDateTime.now())
+                    .type(dto.getType())
+                    .referenceId(dto.getReferenceId())
+                    .createdAt(now)
                     .build();
 
             sseController.sendToClientOrQueue(dto.getLoginId(), message);

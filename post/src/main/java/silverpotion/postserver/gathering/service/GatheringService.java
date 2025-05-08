@@ -153,17 +153,6 @@ public class GatheringService {
 
 
         return gathering.getId();
-
-
-
-
-
-
-
-
-
-
-
     }
 
     // 모임 수정
@@ -383,7 +372,7 @@ public class GatheringService {
                 .loginId(gatheringLeaderLoginId)
                 .title("모임 가입 요청")
                 .content(userNickname + "님이 '" + gathering.getGatheringName() + "' 모임에 가입 요청을 보냈습니다.")
-                .type("JOIN_REQUEST")
+                .type("GATHERING_JOIN_REQUEST")
                 .referenceId(dto.getGatheringId())
                 .build());
 
@@ -416,7 +405,7 @@ public class GatheringService {
                     .loginId(gatheringPeopleLoginId) // 또는 userClient로 얻은 loginId
                     .title("가입 승인 완료")
                     .content("' 모임의 가입 요청이 수락되었습니다.")
-                    .type("JOIN_APPROVED")
+                    .type("JOINED")
                     .referenceId(gathering.getId())
                     .build();
 
@@ -427,7 +416,7 @@ public class GatheringService {
                     .loginId(gatheringPeopleLoginId)
                     .title("모임 비활성화 처리")
                     .content(" 모임에서 탈퇴 또는 해체 처리되었습니다.")
-                    .type("DEACTIVATED")
+                    .type("GATHERING_DEACTIVATED")
                     .referenceId(gathering.getId())
                     .build();
 
@@ -439,7 +428,7 @@ public class GatheringService {
                     .loginId(gatheringPeopleLoginId)
                     .title("모임에서 추방됨")
                     .content(" 모임에서 강제 탈퇴 처리되었습니다.")
-                    .type("BANNED")
+                    .type("GATHERING_BANNED")
                     .referenceId(gathering.getId())
                     .build();
 
@@ -483,7 +472,7 @@ public class GatheringService {
                 .loginId(newLeaderLoginId)
                 .title("모임장 위임 알림")
                 .content("회원님이 '" + gathering.getGatheringName() + "' 모임의 새로운 모임장이 되었습니다.")
-                .type("LEADER_CHANGED")
+                .type("GATHERING_LEADER")
                 .referenceId(gatheringId)
                 .build();
 
@@ -534,7 +523,7 @@ public class GatheringService {
                     .loginId(memberLoginId)
                     .title("모임 해체 알림")
                     .content("'" + gathering.getGatheringName() + " 모임이 해체되었습니다.")
-                    .type("GATHERING_DISBANDED")
+                    .type("GATHERING_DISBAND")
                     .referenceId(gatheringId)
                     .build();
 
@@ -575,14 +564,5 @@ public class GatheringService {
                    .introduce(gathering.getIntroduce())
                    .build();
                }).toList();
-
     }
-
-
-
-
-
-
-
-
 }

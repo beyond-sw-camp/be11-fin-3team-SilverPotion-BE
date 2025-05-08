@@ -1,0 +1,88 @@
+#name: Deploy Silverpotion Backend
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#
+#jobs:
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: checkout github
+#        uses: actions/checkout@v2
+#
+#      - name: install kubectl
+#        uses: azure/setup-kubectl@v3
+#        with:
+#          version: "v1.25.9"
+#        id: install
+#
+#      - name: configure aws
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+#          aws-secret-access-key:  ${{ secrets.AWS_SECRET_KEY }}
+#          aws-region: ap-northeast-2
+#
+#      - name: update cluster infomation
+#        run: aws eks update-kubeconfig --name silverpotion_cluster --region ap-northeast-2
+#
+#      - name: Login to ECR
+#        id: login-ecr
+#        uses: aws-actions/amazon-ecr-login@v1
+##          게이트웨이
+#      - name: gateway build and push docker image to ecr
+#        env:
+#          REGISTRY: 418295678070.dkr.ecr.ap-northeast-2.amazonaws.com
+#          REPOSITORY: gateway
+#          IMAGE_TAG: latest
+#        run: |
+#          docker build \
+#          -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
+#          -f Dockerfile ./gateway
+#          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+##          유저
+#      - name: user build and push docker image to ecr
+#        env:
+#          REGISTRY: 418295678070.dkr.ecr.ap-northeast-2.amazonaws.com
+#          REPOSITORY: user
+#          IMAGE_TAG: latest
+#        run: |
+#          docker build \
+#          -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
+#          -f Dockerfile ./user
+#          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+##          포스트
+#      - name: post build and push docker image to ecr
+#        env:
+#          REGISTRY: 418295678070.dkr.ecr.ap-northeast-2.amazonaws.com
+#          REPOSITORY: post
+#          IMAGE_TAG: latest
+#        run: |
+#          docker build \
+#          -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
+#          -f Dockerfile ./post
+#          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+##          채팅
+#      - name: chat build and push docker image to ecr
+#        env:
+#          REGISTRY: 418295678070.dkr.ecr.ap-northeast-2.amazonaws.com
+#          REPOSITORY: chat
+#          IMAGE_TAG: latest
+#        run: |
+#          docker build \
+#          -t $REGISTRY/$REPOSITORY:$IMAGE_TAG \
+#          -f Dockerfile ./chat
+#          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+##       eks
+#      - name: eks kubectl apply
+#        run: |
+#          kubectl apply -f ./gateway/k8s/k8sgateway.yml
+#          kubectl apply -f ./gateway/k8s/userDepl.yml
+#          kubectl apply -f ./gateway/k8s/zookeeper.yml
+#          kubectl apply -f ./gateway/k8s/kafka.yml
+#          kubectl apply -f ./gateway/k8s/rabbit.yml
+#          kubectl apply -f ./gateway/k8s/postDeplt.yml
+#          kubectl apply -f ./gateway/k8s/chatDepl.yml
+#          kubectl rollout restart deployment ttt-backend -n ttt-ns

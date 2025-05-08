@@ -5,6 +5,7 @@ import com.silverpotion.chatserver.chat.dto.ChatMessageDto;
 import com.silverpotion.chatserver.chat.repository.ChatParticipantRepository;
 import com.silverpotion.chatserver.chat.service.UserFeign;
 import com.silverpotion.chatserver.common.annotation.LoginUser;
+import com.silverpotion.chatserver.notification.dto.NotificationMessageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
@@ -67,7 +68,7 @@ public class SseController {
             }
         }
     }
-    public void sendToClientOrQueue(String loginId, ChatMessageDto message) {
+    public void sendToClientOrQueue(String loginId, NotificationMessageDto message) {
         SseEmitter emitter = emitterMap.get(loginId);
 
         if (emitter != null) {

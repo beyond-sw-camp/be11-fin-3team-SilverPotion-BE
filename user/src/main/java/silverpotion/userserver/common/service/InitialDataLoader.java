@@ -39,7 +39,7 @@ public class InitialDataLoader implements CommandLineRunner {
             User user = User.builder()
                     .sex(Sex.FEMALE)
                     .role(Role.USER)
-                    .phoneNumber("01076084578")
+                    .phoneNumber("01000000000")
                     .name("홍진영")
                     .birthday("19500818")
                     .loginId("user")
@@ -50,6 +50,7 @@ public class InitialDataLoader implements CommandLineRunner {
                     .zipcode("01010")
                     .detailAddress("현대아파트 101호")
                     .region("서울시 동작구")
+                    .healingPotion(10)
                     .build();
 
             userRepository.save(user);
@@ -77,7 +78,7 @@ public class InitialDataLoader implements CommandLineRunner {
             User user1 = User.builder()
                     .sex(Sex.FEMALE)
                     .role(Role.USER)
-                    .phoneNumber("01022345678")
+                    .phoneNumber("01095539812")
                     .name("경수혁")
                     .birthday("20000401")
                     .loginId("user1")
@@ -88,6 +89,7 @@ public class InitialDataLoader implements CommandLineRunner {
                     .zipcode("01011")
                     .detailAddress("레미안 101호")
                     .region("서울시 관악구")
+                    .healingPotion(10)
                     .build();
             userRepository.save(user1);
         }
