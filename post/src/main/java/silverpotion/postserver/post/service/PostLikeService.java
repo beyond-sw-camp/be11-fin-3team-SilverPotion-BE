@@ -104,14 +104,14 @@ public class PostLikeService {
 
 //        캐싱값
         Object cachedValue = voteLikeRedisTemplate.opsForValue().get(redisKey);
-        Long likeCount = cachedValue != null ? ((Number) cachedValue).longValue() : null;
+        Long voteLikeCount = cachedValue != null ? ((Number) cachedValue).longValue() : null;
 
         Long userId = userClient.getUserIdByLoginId(loginId);
         Vote vote = voteRepository.findById(voteId).orElseThrow(()->new EntityNotFoundException("해당 게시물이 존재하지 않습니다."));
 
-        if (likeCount == null) {
-            likeCount = voteLikeRepository.countByVote(vote);
-            voteLikeRedisTemplate.opsForValue().set(redisKey, likeCount, 10, TimeUnit.MINUTES);
+        if (voteLikeCount == null) {
+            voteLikeCount = voteLikeRepository.countByVote(vote);
+            voteLikeRedisTemplate.opsForValue().set(redisKey,voteLikeCount,10,TimeUnit.MINUTES);
         }
 
         Optional<VoteLike> voteLikeOpt = voteLikeRepository.findByVoteAndUserId(vote,userId);
@@ -121,7 +121,7 @@ public class PostLikeService {
             voteLikeRepository.delete(voteLikeOpt.get());
             isLike = false;
             rabbitTemplate.convertAndSend(BACKUP_QUEUE_ML, voteId);
-            vote.decreaseLikeCount();
+            voteLikeCount--;
         } else {
             VoteLike newLike = VoteLike.builder()
                     .vote(vote)
@@ -130,7 +130,7 @@ public class PostLikeService {
             voteLikeRepository.save(newLike);
             isLike = true;
             rabbitTemplate.convertAndSend(BACKUP_QUEUE_AL, voteId);
-            vote.increaseLikeCount();
+            voteLikeCount++;
 
             // 좋아요 알림 전송
             String voteNickName = userClient.getNicknameByUserId(userId);
@@ -149,10 +149,11 @@ public class PostLikeService {
                 notificationProducer.sendNotification(notification);
             }
         }
-        voteLikeRedisTemplate.opsForValue().set(redisKey, likeCount,10, TimeUnit.MINUTES);
+        vote.changeVoteLike(voteLikeCount);
         voteRepository.save(vote);
+        voteLikeRedisTemplate.opsForValue().set(redisKey, voteLikeCount,10, TimeUnit.MINUTES);
 
-        return new PostLikeResDto(vote.getLikeCount(),isLike);
+        return new PostLikeResDto(voteLikeCount,isLike);
     }
 
 }

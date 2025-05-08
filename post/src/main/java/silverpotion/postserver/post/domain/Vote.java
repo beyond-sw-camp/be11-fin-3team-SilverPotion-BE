@@ -94,25 +94,10 @@ public class Vote extends BaseTimeEntity {
     public void setCloseTime() {
         this.closeTime = LocalDateTime.now().plusDays(2);
     }
-    // --- 좋아요 수 증가 ---
-    public void increaseLikeCount() {
-        if (this.likeCount == null) this.likeCount = 0L;
-        this.likeCount++;
-    }
 
-    // --- 좋아요 수 감소 ---
-    public void decreaseLikeCount() {
-        if (this.likeCount == null || this.likeCount <= 0) {
-            this.likeCount = 0L;
-        } else {
-            this.likeCount--;
-        }
-    }
-    public void setVoteOptions(List<VoteOptions> voteOptions) {
-        this.voteOptions = voteOptions;
-        for (VoteOptions option : voteOptions) {
-            option.updateVote(this); // FK 설정 (연관관계 주인)
-        }
+    //좋아요 수 변경
+    public void changeVoteLike(Long likeCount){
+        this.likeCount = likeCount;
     }
 
     @PrePersist
