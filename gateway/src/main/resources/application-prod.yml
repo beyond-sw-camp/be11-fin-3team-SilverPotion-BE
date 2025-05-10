@@ -58,8 +58,16 @@ spring:
 #        enabled: true
 #    loadbalancer:
 #      mode: service
-
-
+        httpclient:
+          wiretap: true
+          response-timeout: 10m
+          pool:
+            type: elastic
+            max-connections: 500
+#sse 설정
+server:
+  http2:
+    enabled: false
 jwt:
   secretKey: ${JWT_SECRET}
 
